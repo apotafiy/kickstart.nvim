@@ -201,6 +201,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.api.nvim_set_keymap('n', '<C-d>', '10j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '10k', { noremap = true, silent = true })
 
+-- Set search and replace shortcut
+vim.api.nvim_set_keymap('n', 'S', ':%s///g<Left><Left><Left>', { noremap = true, silent = false })
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
