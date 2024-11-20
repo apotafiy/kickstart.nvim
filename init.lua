@@ -197,6 +197,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+-- Set scroll up/down only third of a page instead half page
+vim.api.nvim_set_keymap('n', '<C-d>', '10j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-u>', '10k', { noremap = true, silent = true })
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
