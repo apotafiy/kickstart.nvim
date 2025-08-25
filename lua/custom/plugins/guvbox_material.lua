@@ -1,11 +1,44 @@
+-- return {
+--   'sainnhe/gruvbox-material',
+--   priority = 1000, -- Make sure it's loaded early
+--   config = function()
+--     vim.g.gruvbox_material_background = 'hard' -- Options: 'soft', 'medium', 'hard'
+--     vim.g.gruvbox_material_enable_italic = 1
+--     vim.g.gruvbox_material_enable_bold = 1
+--     vim.g.gruvbox_material_foreground = 'material' -- Options: 'material', 'mix', 'original',
+--     vim.cmd [[colorscheme gruvbox-material]]
+--   end,
+-- }
+
 return {
   'sainnhe/gruvbox-material',
-  priority = 1000, -- Make sure it's loaded early
+  priority = 1000, -- load early so it takes effect before other plugins
   config = function()
-    vim.g.gruvbox_material_background = 'hard' -- Options: 'soft', 'medium', 'hard'
+    -- Background darkness level: "soft" = lightest, "medium" = default, "hard" = darkest
+    vim.g.gruvbox_material_background = 'soft'
+
+    -- Font style
     vim.g.gruvbox_material_enable_italic = 1
     vim.g.gruvbox_material_enable_bold = 1
-    vim.g.gruvbox_material_foreground = 'material' -- Options: 'material', 'mix', 'original',
-    vim.cmd [[colorscheme gruvbox-material]]
+
+    -- Foreground (text) brightness:
+    -- "material" = bright & clean
+    -- "mix" = in between
+    -- "original" = muted, classic Gruvbox
+    vim.g.gruvbox_material_foreground = 'material'
+
+    -- Optional: remove terminal transparency (can make text look lighter if your terminal bg is very dark)
+    vim.g.gruvbox_material_transparent_background = 0
+
+    -- Apply the colorscheme
+    vim.opt.termguicolors = true
+    vim.opt.background = 'dark'
+    vim.cmd.colorscheme 'gruvbox-material'
+
+    -- Example: override Normal to make it even brighter
+    vim.api.nvim_set_hl(0, 'Normal', { fg = '#fbdbb2', bg = '#1d2021' })
+
+    -- Add this line to enhance visual mode highlighting
+    vim.api.nvim_set_hl(0, 'Visual', { bg = '#504945', fg = '#ebdbb2', bold = true })
   end,
 }
