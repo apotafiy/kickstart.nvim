@@ -15,30 +15,16 @@ return {
     -- "original" = muted, classic Gruvbox
     vim.g.gruvbox_material_foreground = 'material'
 
-    -- Enable transparent background so terminal wallpaper shows through
-    vim.g.gruvbox_material_transparent_background = 2
+    -- Optional: remove terminal transparency (can make text look lighter if your terminal bg is very dark)
+    vim.g.gruvbox_material_transparent_background = 0
 
     -- Apply the colorscheme
     vim.opt.termguicolors = true
     vim.opt.background = 'dark'
     vim.cmd.colorscheme 'gruvbox-material'
 
-    -- Clear bg on all groups for full transparency
-    local groups = {
-      'Normal', 'NormalNC', 'NormalFloat', 'SignColumn', 'EndOfBuffer',
-      'LineNr', 'CursorLineNr', 'Folded', 'FoldColumn',
-      'NonText', 'SpecialKey', 'VertSplit', 'WinSeparator',
-      'StatusLine', 'StatusLineNC', 'TabLineFill',
-      'DiagnosticSignError', 'DiagnosticSignWarn', 'DiagnosticSignInfo', 'DiagnosticSignHint',
-      'GitSignsAdd', 'GitSignsChange', 'GitSignsDelete',
-      'CursorLine', 'ColorColumn',
-    }
-    for _, group in ipairs(groups) do
-      local hl = vim.api.nvim_get_hl(0, { name = group })
-      hl.bg = nil
-      hl.ctermbg = nil
-      vim.api.nvim_set_hl(0, group, hl)
-    end
+    -- Example: override Normal to make it even brighter
+    vim.api.nvim_set_hl(0, 'Normal', { fg = '#fbdbb2', bg = '#1d2021' })
 
     -- Add this line to enhance visual mode highlighting
     vim.api.nvim_set_hl(0, 'Visual', { bg = '#504945', fg = '#ebdbb2', bold = true })
