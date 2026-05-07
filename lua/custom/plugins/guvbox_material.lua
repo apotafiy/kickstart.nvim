@@ -1,3 +1,15 @@
+-- return {
+--   'sainnhe/gruvbox-material',
+--   priority = 1000, -- Make sure it's loaded early
+--   config = function()
+--     vim.g.gruvbox_material_background = 'hard' -- Options: 'soft', 'medium', 'hard'
+--     vim.g.gruvbox_material_enable_italic = 1
+--     vim.g.gruvbox_material_enable_bold = 1
+--     vim.g.gruvbox_material_foreground = 'material' -- Options: 'material', 'mix', 'original',
+--     vim.cmd [[colorscheme gruvbox-material]]
+--   end,
+-- }
+
 return {
   'sainnhe/gruvbox-material',
   priority = 1000, -- load early so it takes effect before other plugins
@@ -28,11 +40,5 @@ return {
 
     -- Add this line to enhance visual mode highlighting
     vim.api.nvim_set_hl(0, 'Visual', { bg = '#504945', fg = '#ebdbb2', bold = true })
-
-    -- Selected tab (the active tab)
-    vim.api.nvim_set_hl(0, 'TabLineSel', { fg = '#ebdbb2', bg = '#a9b665', bold = true })
-
-    -- Unselected tabs
-    vim.api.nvim_set_hl(0, 'TabLine', { fg = '#c4b793', bg = '#3c3836' })
   end,
 }
