@@ -8,14 +8,17 @@ return {
     vim.g.gruvbox_material_foreground = 'material' -- Options: 'material', 'mix', 'original',
     vim.g.gruvbox_material_transparent_background = 2 -- 0=disabled, 1=half transparent, 2=full transparent
 
-    -- Apply the colorscheme
+-- Apply the colorscheme
     vim.cmd.colorscheme 'gruvbox-material'
-
-    -- Essential overrides for full transparency
+    
     -- Cursor line must be transparent for theme transparency to work
     vim.api.nvim_set_hl(0, 'CursorLine', {})
-
-    -- Visual selection needs transparent background with visible text
+    
+    -- Visual selection - transparent background with bold/italic text
     vim.api.nvim_set_hl(0, 'Visual', { fg = '#ebdbb2', bold = true, italic = true })
+    
+    -- Make telescope transparent
+    vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = 'none' })
+    vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = 'none' })
   end,
 }
