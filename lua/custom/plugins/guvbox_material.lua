@@ -23,14 +23,14 @@ return {
     vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { bg = 'none' })
     
-    -- Make LSP floating windows dark grey
-    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#3a3a3a' })
-    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#3a3a3a' })
+    -- Make LSP floating windows match gruvbox-material 'hard' palette
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#282828' })
+    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#282828' })
     
-    -- Make completion menu dark grey
-    vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#3a3a3a' })
-    vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#424242', fg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = '#3a3a3a' })
-    vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#3a3a3a' })
+    -- Make completion menu match theme
+    vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#282828' })
+    vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#504945', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = '#282828' })
+    vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#282828' })
   end,
 }
