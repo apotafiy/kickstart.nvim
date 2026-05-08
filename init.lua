@@ -221,6 +221,31 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- [[ Floating Window Configuration ]]
+-- Standardize all floating windows (diagnostics, LSP hover, signature help, cmp) with rounded borders.
+-- NOTE: NormalFloat/FloatBorder highlight groups are configured in guvbox_material.lua
+-- so they load AFTER the colorscheme (which would otherwise override them).
+
+-- Diagnostic popups: rounded borders + show LSP source
+vim.diagnostic.config({
+  float = {
+    border = "rounded",
+    source = "always",
+  },
+})
+
+-- LSP hover and signature help: rounded borders (Neovim 0.11+ API)
+-- In 0.11+, these are buffer functions accepting config directly (handlers API is deprecated).
+local lsp_hover = vim.lsp.buf.hover
+vim.lsp.buf.hover = function()
+  return lsp_hover({ border = "rounded" })
+end
+
+local lsp_signature_help = vim.lsp.buf.signature_help
+vim.lsp.buf.signature_help = function()
+  return lsp_signature_help({ border = "rounded" })
+end
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -846,6 +871,18 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+        },
+        
+        -- Task 3: Integration with nvim-cmp - Add bordered windows
+        window = {
+          completion = cmp.config.window.bordered({
+            border = "rounded",
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          }),
+          documentation = cmp.config.window.bordered({
+            border = "rounded",
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          }),
         },
       }
     end,
