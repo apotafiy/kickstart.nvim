@@ -227,23 +227,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- so they load AFTER the colorscheme (which would otherwise override them).
 
 -- Diagnostic popups: rounded borders + show LSP source
-vim.diagnostic.config({
+vim.diagnostic.config {
   float = {
-    border = "rounded",
-    source = "always",
+    border = 'rounded',
+    source = 'always',
   },
-})
+}
 
 -- LSP hover and signature help: rounded borders (Neovim 0.11+ API)
 -- In 0.11+, these are buffer functions accepting config directly (handlers API is deprecated).
 local lsp_hover = vim.lsp.buf.hover
 vim.lsp.buf.hover = function()
-  return lsp_hover({ border = "rounded" })
+  return lsp_hover { border = 'rounded' }
 end
 
 local lsp_signature_help = vim.lsp.buf.signature_help
 vim.lsp.buf.signature_help = function()
-  return lsp_signature_help({ border = "rounded" })
+  return lsp_signature_help { border = 'rounded' }
 end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -882,17 +882,17 @@ require('lazy').setup({
           { name = 'luasnip' },
           { name = 'path' },
         },
-        
+
         -- Task 3: Integration with nvim-cmp - Add bordered windows
         window = {
-          completion = cmp.config.window.bordered({
-            border = "rounded",
-            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          }),
-          documentation = cmp.config.window.bordered({
-            border = "rounded",
-            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          }),
+          completion = cmp.config.window.bordered {
+            border = 'rounded',
+            winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+          },
+          documentation = cmp.config.window.bordered {
+            border = 'rounded',
+            winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+          },
         },
       }
     end,
@@ -945,7 +945,7 @@ require('lazy').setup({
     main = 'nvim-treesitter', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'go' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
