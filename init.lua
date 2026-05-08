@@ -553,6 +553,9 @@ require('lazy').setup({
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
+          -- Show diagnostics in a floating window.
+          map('<leader>e', vim.diagnostic.open_float, 'Show diagnostic [E]rror')
+
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -617,7 +620,21 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        basedpyright = {
+          -- Use basedpyright (Python version of pyright)
+          cmd = { 'basedpyright-langserver', '--stdio' },
+          capabilities = capabilities,
+          settings = {
+            basedpyright = {
+              analysis = {
+                inlayHints = {
+                  variableTypes = true,
+                  callArgumentNames = true,
+                },
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
