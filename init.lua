@@ -679,6 +679,16 @@ require('lazy').setup({
               completion = {
                 callSnippet = 'Replace',
               },
+              workspace = {
+                -- Don't prompt about third-party libraries (prevents re-indexing)
+                checkThirdParty = false,
+                -- Limit how many files lua_ls preloads into workspace
+                maxPreload = 2000,
+                -- Skip files larger than 1MB (minified bundles etc.)
+                preloadFileSize = 1000,
+              },
+              -- Disable telemetry
+              telemetry = { enable = false },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
