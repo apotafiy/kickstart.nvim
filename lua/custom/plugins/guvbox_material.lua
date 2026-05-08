@@ -22,15 +22,15 @@ return {
     vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { bg = 'none' })
-    
+
     -- Transparent floating windows (diagnostics, hover, signature help, cmp)
     -- Set here (not in init.lua) to ensure they load AFTER the colorscheme
     vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#928374', bg = 'none' })
 
-    -- Completion menu (Pmenu) - transparent with theme-matching selection
+    -- Completion menu (Pmenu) - transparent with prominent selection
     vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'none' })
-    vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#504945', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'PmenuSel', { bg = 'none', fg = '#ebdbb2', bold = true, italic = true })
     vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#504945' })
   end,
