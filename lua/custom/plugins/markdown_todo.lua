@@ -27,12 +27,12 @@ return {
           end
         end, { buffer = args.buf })
 
-        -- Normal mode Enter key: toggle existing todo or create new one
-        vim.keymap.set('n', '<CR>', function()
+        -- Leader+c for creating/toggling todos
+        vim.keymap.set('n', '<leader>c', function()
           local line = vim.api.nvim_get_current_line()
           -- Check if line starts with a todo checkbox (with optional indentation)
           local indent, checkbox = line:match '^(%s*)(- %[.%])'
-          
+
           if checkbox then
             -- Toggle between "- [ ]" and "- [x]"
             local new_checkbox
@@ -44,16 +44,16 @@ return {
               -- For any other checkbox state (like "- [~]"), default to "- [ ]"
               new_checkbox = '- [ ]'
             end
-            
+
             -- Keep rest of the line content after checkbox
             local rest_of_line = line:match '%- %[.%](.*)$'
             if rest_of_line == nil then
               rest_of_line = ''
             end
-            
+
             local new_line = indent .. new_checkbox .. rest_of_line
             vim.api.nvim_set_current_line(new_line)
-            
+
             -- Move cursor to end of checkbox
             local cursor_row = vim.api.nvim_win_get_cursor(0)[1]
             local cursor_col = #(indent .. new_checkbox)
@@ -65,7 +65,7 @@ return {
             local indent_str = indent_match or ''
             local new_line = indent_str .. '- [ ] ' .. trim_line
             vim.api.nvim_set_current_line(new_line)
-            
+
             -- Move cursor to end of checkbox
             local cursor_row = vim.api.nvim_win_get_cursor(0)[1]
             local cursor_col = #(indent_str .. '- [ ] ')
