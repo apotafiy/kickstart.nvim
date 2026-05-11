@@ -936,7 +936,15 @@ require('lazy').setup({
         return '%2l:%-2v'
       end
 
-      -- ... and there is more!
+      -- Add git branch to statusline via gitsigns
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_git = function()
+        local branch = vim.b.gitsigns_head
+        if branch and branch ~= '' then
+          return '  ' .. branch
+        end
+        return ''
+      end
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
