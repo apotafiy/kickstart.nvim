@@ -33,5 +33,6 @@ return {
     vim.api.nvim_set_hl(0, 'PmenuSel', { bg = 'none', fg = '#ebdbb2', bold = true, italic = true })
     vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#504945' })
+    vim.api.nvim_set_hl(0, 'MsgArea', { bg = '#282828' })
   end,
 }
