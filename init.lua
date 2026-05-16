@@ -713,6 +713,8 @@ require('lazy').setup({
         'isort',
         'black',
         'basedpyright',
+        'debugpy',
+        'tree-sitter-cli',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
