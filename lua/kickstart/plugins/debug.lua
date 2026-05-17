@@ -23,26 +23,28 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+
+    'theHamsta/nvim-dap-virtual-text',
   },
   keys = function(_, keys)
     local dap = require 'dap'
     local dapui = require 'dapui'
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
-      { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-      { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-      { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
-      { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
+      { '<Up>', dap.continue, desc = 'Debug: Start/Continue' },
+      { '<Right>', dap.step_into, desc = 'Debug: Step Into' },
+      { '<Down>', dap.step_over, desc = 'Debug: Step Over' },
+      { '<Left>', dap.step_out, desc = 'Debug: Step Out' },
+      { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
       {
-        '<leader>B',
+        '<leader>dB',
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
         desc = 'Debug: Set Breakpoint',
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
+      { '<leader>du', dapui.toggle, desc = 'Debug: Toggle DAP UI.' },
       unpack(keys),
     }
   end,
@@ -63,7 +65,7 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
+        'delve', -- unclear if this will be needed for go.
       },
     }
 
@@ -74,32 +76,20 @@ return {
       --    Feel free to remove or use ones that you like more! :)
       --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
     }
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    -- TODO move this to separate custom plugin file
     -- Install golang specific config
-    require('dap-go').setup {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
-      },
-    }
+    -- require('dap-go').setup {
+    --   delve = {
+    --     -- On Windows delve must be run attached or it crashes.
+    --     -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
+    --     detached = vim.fn.has 'win32' == 0,
+    --   },
+    -- }
   end,
 }
