@@ -5,23 +5,28 @@ return {
   },
   config = function()
     require('scrollbar').setup {
+      -- Performance Tweak
+      max_lines = 5000,
+      folds = 500,
+      throttle_ms = 100,
+
       show_in_active_only = true,
       hide_if_all_visible = true,
 
-      -- 1. Visual Handle (Gruvbox Material 'Grey')
+      -- Visual Handle (Gruvbox Material 'Grey')
       handle = {
         text = ' ',
         color = '#7c6f64', -- Soft, warm grey for the moving thumb slider
       },
 
-      -- 2. Background Track (Gruvbox Material 'Bg0' / 'Bg1')
+      -- Background Track (Gruvbox Material 'Bg0' / 'Bg1')
       background = {
         text = ' ',
         color = '#282828', -- Classic Gruvbox Material medium dark background
         blend = 0, -- Keep it solid to match the background cleanly
       },
 
-      -- 3. Marks & HUD Indicators (Gruvbox Material Accent Palette)
+      -- Marks & HUD Indicators (Gruvbox Material Accent Palette)
       marks = {
         Search = { color = '#e78a4e' }, -- Material Orange
         Error = { color = '#ea6962' }, -- Material Red (much softer than pure red)
