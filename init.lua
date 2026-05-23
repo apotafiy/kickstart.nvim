@@ -237,6 +237,16 @@ vim.diagnostic.config {
     border = 'rounded',
     source = 'always',
   },
+  -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float {
+        bufnr = bufnr,
+        scope = 'cursor',
+        focus = false,
+      }
+    end,
+  },
 }
 
 -- LSP hover and signature help: rounded borders (Neovim 0.11+ API)
