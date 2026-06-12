@@ -653,6 +653,9 @@ require('lazy').setup({
                   variableTypes = true,
                   callArgumentNames = true,
                 },
+                diagnosticSeverityOverrides = {
+                  reportUnusedCallResult = 'none',
+                },
               },
             },
           },
@@ -716,17 +719,17 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+        ensure_installed = {}, -- handled by mason-tool-installer above
+        automatic_enable = true,
       }
+
+      -- Apply per-server config overrides. In mason-lspconfig v2 / Neovim 0.11+,
+      -- the `handlers` API was removed. Use `vim.lsp.config()` to merge our
+      -- settings/capabilities with lspconfig's defaults from `lsp/<server>.lua`.
+      for server_name, server in pairs(servers) do
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        vim.lsp.config(server_name, server)
+      end
     end,
   },
 
