@@ -649,12 +649,10 @@ require('lazy').setup({
           settings = {
             basedpyright = {
               analysis = {
+                typeCheckingMode = 'standard',
                 inlayHints = {
                   variableTypes = true,
                   callArgumentNames = true,
-                },
-                diagnosticSeverityOverrides = {
-                  reportUnusedCallResult = 'none',
                 },
               },
             },
