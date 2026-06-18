@@ -8,19 +8,24 @@ return {
       callback = function(args)
         vim.keymap.set('i', '<CR>', function()
           local line = vim.api.nvim_get_current_line()
-          local indent = line:match '^(%s*)- %[.%]'
-          if indent then
+          local indent, prefix_len = line:match '^(%s*)- %[.%] ()'
+          -- Only treat as a todo continuation if the cursor is past the
+          -- checkbox prefix (i.e. inside the content area, not inside "- [ ] ")
+          local col = vim.api.nvim_win_get_cursor(0)[2]
+          if indent and prefix_len and col >= (prefix_len - 1) then
             -- Normalize tabs to spaces
             indent = indent:gsub('\t', '    ')
-            local keys = vim.api.nvim_replace_termcodes('<CR><C-u>', true, false, true)
-            vim.api.nvim_feedkeys(keys, 'n', false)
-            vim.schedule(function()
-              -- Force the line to exact indent, no auto-indent
-              local new_line = indent .. '- [ ] '
-              vim.api.nvim_set_current_line(new_line)
-              local row = vim.api.nvim_win_get_cursor(0)[1]
-              vim.api.nvim_win_set_cursor(0, { row, #new_line })
-            end)
+            -- Split line at cursor: text after cursor moves to new todo (trimmed)
+            local after = line:sub(col + 1)
+            local trimmed_after = after:gsub('^%s+', '')
+            local before = line:sub(1, col)
+
+            -- Replace current line with the "before cursor" part, then build new line
+            vim.api.nvim_set_current_line(before)
+            local row = vim.api.nvim_win_get_cursor(0)[1]
+            local new_line = indent .. '- [ ] ' .. trimmed_after
+            vim.api.nvim_buf_set_lines(0, row, row, false, { new_line })
+            vim.api.nvim_win_set_cursor(0, { row + 1, #new_line })
           else
             local keys = vim.api.nvim_replace_termcodes('<CR>', true, false, true)
             vim.api.nvim_feedkeys(keys, 'n', false)
