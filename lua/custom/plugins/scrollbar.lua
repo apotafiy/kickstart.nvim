@@ -44,7 +44,6 @@ return {
         'TelescopePrompt',
         'NvimTree',
         'neo-tree',
-        'oil',
       },
       excluded_buftypes = {
         'terminal',
