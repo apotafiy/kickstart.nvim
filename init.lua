@@ -171,6 +171,12 @@ vim.opt.conceallevel = 2
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
+-- Fold options for nvim-ufo
+vim.opt.foldcolumn = '0'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 vim.keymap.set({ 'i', 'n', 'v' }, 'kj', '<Esc>', { noremap = true, silent = true })
