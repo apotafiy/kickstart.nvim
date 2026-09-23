@@ -420,10 +420,12 @@ require('lazy').setup({
       require('telescope').setup {
         defaults = {
           winblend = 0,
+          sorting_strategy = 'ascending',
           layout_strategy = 'horizontal',
           layout_config = {
             horizontal = {
               preview_width = 0.66,
+              prompt_position = 'top',
             },
           },
         },
