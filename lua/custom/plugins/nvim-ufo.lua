@@ -3,7 +3,10 @@ return {
   dependencies = { 'kevinhwang91/promise-async' },
   event = 'BufReadPost',
   opts = {
-    provider_selector = function(_, _, _)
+    provider_selector = function(_, filetype, _)
+      if filetype == 'markdown' then
+        return '' -- let vim-markdown handle markdown folding
+      end
       return { 'treesitter', 'indent' }
     end,
   },
