@@ -17,6 +17,15 @@ return {
     -- Visual selection - transparent background with bold/italic text
     vim.api.nvim_set_hl(0, 'Visual', { fg = '#ebdbb2', bold = true, italic = true })
 
+    -- Git hunk inline previews (the word-diff regions, used by both
+    -- preview_hunk and preview_hunk_inline). gitsigns links these to
+    -- TermCursor, which is reverse video here, so the changed words end up
+    -- inverted against the diff line and become unreadable. Use explicit
+    -- dark-on-accent colors instead.
+    vim.api.nvim_set_hl(0, 'GitSignsAddInline', { fg = '#1d2021', bg = '#a9b665' })
+    vim.api.nvim_set_hl(0, 'GitSignsChangeInline', { fg = '#1d2021', bg = '#89b482' })
+    vim.api.nvim_set_hl(0, 'GitSignsDeleteInline', { fg = '#1d2021', bg = '#ea6962' })
+
     -- Make telescope transparent
     vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = 'none' })
