@@ -36,6 +36,8 @@ return {
     -- Set here (not in init.lua) to ensure they load AFTER the colorscheme
     vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
     vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#928374', bg = 'none' })
+    -- Float titles (e.g. goto-preview filename) would otherwise get theme bg5
+    vim.api.nvim_set_hl(0, 'FloatTitle', { fg = '#e78a4e', bg = 'none', bold = true })
 
     -- Completion menu (Pmenu) - transparent with prominent selection
     vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'none' })
